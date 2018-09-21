@@ -1,41 +1,29 @@
 package com.tanzhiqiang.kmvvm.mvvm.view
 
-import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import com.google.android.material.snackbar.Snackbar
+import android.util.Log
+import androidx.lifecycle.Observer
 import com.tanzhiqiang.kmvvm.R
+import com.tanzhiqiang.kmvvm.mvvm.view.base.BaseActivity
+import com.tanzhiqiang.kmvvm.mvvm.viewmodel.base.WeatherViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<WeatherViewModel>() {
+    override fun layoutId(): Int = R.layout.activity_main
+    override fun providerVMClass(): Class<WeatherViewModel> = WeatherViewModel::class.java
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar as Toolbar?)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+    override fun initView() {
+        setSupportActionBar(toolbar)
+        fab.setOnClickListener {
+            mViewModel?.getWeather("成都")
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+    override fun startObserve() {
+        mViewModel?.let {
+            it.mWeather.observe(this, Observer { it ->
+                Log.i("tt", "天气信息:${it.city}:${it.data.wendu}")
+            })
         }
     }
 }

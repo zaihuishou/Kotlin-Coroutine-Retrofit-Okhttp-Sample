@@ -17,6 +17,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         prepareBeforeView()
         initView()
         initVM()
+        startObserve()
     }
 
     /**
@@ -26,6 +27,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     open fun prepareBeforeView() {}
     open fun initView() {}
+    open fun startObserve() {}
 
     private fun initVM() {
         providerVMClass()?.let { it ->
@@ -44,7 +46,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     override fun onDestroy() {
         mViewModel?.let {
             lifecycle.removeObserver(it)
-            it.clearLaunchTask()
         }
 
         super.onDestroy()
