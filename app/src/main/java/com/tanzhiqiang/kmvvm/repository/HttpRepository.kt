@@ -14,7 +14,7 @@ object HttpRepository {
     private fun getApiService(): Api {
         //https://raw.githubusercontent.com/zaihuishou/Kotlin-mvvm/master/weather
         return Retrofit.Builder()
-                .baseUrl("https://raw.githubusercontent.com/zaihuishou/")
+                .baseUrl("https://raw.githubusercontent.com/")
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .client(provideOkHttpClient(provideLoggingInterceptor()))
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
