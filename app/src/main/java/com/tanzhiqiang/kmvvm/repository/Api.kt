@@ -9,6 +9,6 @@ interface Api {
     /**
      * 获取天气信息
      */
-    @GET("open/api/weather/json.shtml?city={city}")
-    fun getWeather(@Path("city") city: String): Deferred<Weather>
+    @GET("Kotlin-mvvm/master/weather")
+    fun getWeather(): Deferred<Weather>
 }

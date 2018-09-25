@@ -11,10 +11,10 @@ class WeatherViewModel : BaseViewModel() {
 
     val mWeather: MutableLiveData<Weather> = MutableLiveData()
 
-    fun getWeather(city: String) {
+    fun getWeather() {
         launchOnUITryCatch(
                 {
-                    val weather = async(IO) { HttpRepository.getWeather(city) }.await()
+                    val weather = async(IO) { HttpRepository.getWeather() }.await()
                     mWeather.value = weather.await()
                 }
                 ,

@@ -19,7 +19,12 @@ data class Data(
         val ganmao: String,
         val yesterday: Yesterday,
         val forecast: List<Forecast>
-)
+
+) {
+    override fun toString(): String {
+        return "Data(shidu='$shidu', pm25=$pm25, pm10=$pm10, quality='$quality', wendu='$wendu', ganmao='$ganmao', yesterday=$yesterday, forecast=$forecast)"
+    }
+}
 
 data class Yesterday(
         val date: String,

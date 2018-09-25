@@ -15,14 +15,14 @@ class MainActivity : BaseActivity<WeatherViewModel>() {
     override fun initView() {
         setSupportActionBar(toolbar)
         fab.setOnClickListener {
-            mViewModel?.getWeather("成都")
+            mViewModel?.getWeather()
         }
     }
 
     override fun startObserve() {
         mViewModel?.let {
             it.mWeather.observe(this, Observer { it ->
-                Log.i("tt", "天气信息:${it.city}:${it.data.wendu}")
+                Log.i("tt", "天气信息:${it.data}:${it.data.wendu}")
             })
         }
     }
