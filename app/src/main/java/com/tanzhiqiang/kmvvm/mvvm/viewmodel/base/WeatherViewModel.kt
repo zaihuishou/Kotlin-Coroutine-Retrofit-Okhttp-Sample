@@ -1,5 +1,6 @@
 package com.tanzhiqiang.kmvvm.mvvm.viewmodel.base
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.tanzhiqiang.kmvvm.mvvm.model.Weather
 import com.tanzhiqiang.kmvvm.repository.HttpRepository
@@ -18,7 +19,7 @@ class WeatherViewModel : BaseViewModel() {
                 }
                 ,
                 {
-
+                    Log.i("tt", "${it.message}")
                 }, {}, true)
     }
 }
