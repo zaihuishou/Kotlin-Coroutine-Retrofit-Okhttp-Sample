@@ -1,7 +1,7 @@
 # Kotlin-mvvm
 The sample is pure Kotlin,the main architecture is MVVM
 
-##Use [AndroidX](https://developer.android.com/topic/libraries/support-library/androidx-overview)
+## Use [AndroidX](https://developer.android.com/topic/libraries/support-library/androidx-overview)
  - All libraries are replace to androidx.*
 
 ## Use [Jetpack](https://developer.android.com/jetpack/)
