@@ -1,11 +1,15 @@
 package com.tanzhiqiang.kmvvm.mvvm.viewmodel.base
 
+import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.Main
+import kotlin.coroutines.experimental.CoroutineContext
 
-open class BaseViewModel : ViewModel(), LifecycleObserver {
+open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope {
 
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
     private val mLaunchManager: MutableList<Job> = mutableListOf()
 
 
@@ -23,7 +27,7 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
      * add launch task to [mLaunchManager]
      */
     private fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
-        val job = launch(Dispatchers.Main) { block() }
+        val job = launch { block() }
         mLaunchManager.add(job)
         job.invokeOnCompletion { mLaunchManager.remove(job) }
 
@@ -49,10 +53,12 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestory() {
+        Log.i("tt", "onDestory")
         clearLaunchTask()
     }
 
-    fun clearLaunchTask() {
+    private fun clearLaunchTask() {
         mLaunchManager.clear()
     }
+
 }

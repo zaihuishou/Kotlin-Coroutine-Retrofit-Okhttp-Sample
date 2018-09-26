@@ -2,6 +2,7 @@ package com.tanzhiqiang.kmvvm.mvvm.view.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
 import com.tanzhiqiang.kmvvm.mvvm.viewmodel.base.BaseViewModel
 import kotlinx.android.extensions.CacheImplementation
@@ -14,10 +15,15 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutId())
-        prepareBeforeView()
+        prepareBeforeInitView()
+        setToolbar()
         initView()
         initVM()
         startObserve()
+    }
+
+    private fun setToolbar() {
+        providerToolBar()?.let { setSupportActionBar(it) }
     }
 
     /**
@@ -25,7 +31,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
      */
     abstract fun layoutId(): Int
 
-    open fun prepareBeforeView() {}
+    open fun prepareBeforeInitView() {}
     open fun initView() {}
     open fun startObserve() {}
 
@@ -33,9 +39,13 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         providerVMClass()?.let { it ->
             mViewModel = ViewModelProviders.of(this).get(it)
             lifecycle.addObserver(mViewModel!!)
-
         }
     }
+
+    /**
+     *设置[Toolbar]
+     */
+    open fun providerToolBar(): Toolbar? = null
 
     /**
      * [BaseViewModel]的实现类

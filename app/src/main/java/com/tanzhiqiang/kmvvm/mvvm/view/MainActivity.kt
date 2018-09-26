@@ -1,21 +1,31 @@
 package com.tanzhiqiang.kmvvm.mvvm.view
 
 import android.util.Log
+import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import com.tanzhiqiang.kmvvm.R
 import com.tanzhiqiang.kmvvm.mvvm.view.base.BaseActivity
 import com.tanzhiqiang.kmvvm.mvvm.viewmodel.base.WeatherViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : BaseActivity<WeatherViewModel>() {
     override fun layoutId(): Int = R.layout.activity_main
     override fun providerVMClass(): Class<WeatherViewModel> = WeatherViewModel::class.java
 
+    override fun providerToolBar(): Toolbar = toolbar
     override fun initView() {
-        setSupportActionBar(toolbar)
         fab.setOnClickListener {
-            mViewModel?.getWeather()
+            mViewModel?.getWeather(
+                    {
+                        progress_bar.visibility = View.VISIBLE
+                    },
+                    {
+                        tv_hello.visibility = View.VISIBLE
+                        progress_bar.visibility = View.GONE
+                    })
         }
     }
 
@@ -23,7 +33,14 @@ class MainActivity : BaseActivity<WeatherViewModel>() {
         mViewModel?.let {
             it.mWeather.observe(this, Observer { it ->
                 Log.i("tt", "天气信息:${it.data}:${it.data.wendu}")
+                tv_hello.text = "${it.data}"
+
             })
         }
+    }
+
+    override fun onDestroy() {
+        Log.i("tt", "MainActivity onDestory")
+        super.onDestroy()
     }
 }

@@ -12,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object HttpRepository {
     private fun getApiService(): Api {
-        //https://raw.githubusercontent.com/zaihuishou/Kotlin-mvvm/master/weather
         return Retrofit.Builder()
                 .baseUrl("https://raw.githubusercontent.com/")
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
@@ -27,8 +26,6 @@ object HttpRepository {
     private fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
             .apply { level = HttpLoggingInterceptor.Level.BODY }
 
-    suspend fun getWeather(): Deferred<Weather> {
-        return getApiService().getWeather()
-    }
+    fun getWeather() = getApiService().getWeather()
 
 }
