@@ -49,6 +49,7 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope {
         } finally {
             finallyBlock()
         }
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
