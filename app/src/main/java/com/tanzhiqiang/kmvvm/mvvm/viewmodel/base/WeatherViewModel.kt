@@ -4,13 +4,15 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.tanzhiqiang.kmvvm.mvvm.model.Weather
 import com.tanzhiqiang.kmvvm.repository.HttpRepository
-import kotlinx.coroutines.IO
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 
 class WeatherViewModel : BaseViewModel() {
 
     val mWeather: MutableLiveData<Weather> = MutableLiveData()
-
+    /**
+     * @param start 这个方法中可以显示加载进度条等
+     * @param finally 可以隐藏进度条等
+     */
     fun getWeather(start: () -> Unit, finally: () -> Unit) {
         launchOnUITryCatch(
                 {
@@ -24,4 +26,5 @@ class WeatherViewModel : BaseViewModel() {
                 }, { finally() }, true)
 
     }
+
 }
