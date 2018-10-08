@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.tanzhiqiang.kmvvm.mvvm.model.Weather
 import com.tanzhiqiang.kmvvm.repository.HttpRepository
-import kotlinx.coroutines.experimental.IO
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.async
 
 class WeatherViewModel : BaseViewModel() {
 

@@ -2,16 +2,14 @@ package com.tanzhiqiang.kmvvm.mvvm.viewmodel.base
 
 import android.util.Log
 import androidx.lifecycle.*
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.android.Main
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
     private val mLaunchManager: MutableList<Job> = mutableListOf()
-
 
     protected fun launchOnUITryCatch(tryBlock: suspend CoroutineScope.() -> Unit,
                                      cacheBlock: suspend CoroutineScope.(Throwable) -> Unit,

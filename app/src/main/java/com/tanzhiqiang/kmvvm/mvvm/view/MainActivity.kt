@@ -32,7 +32,6 @@ class MainActivity : BaseActivity<WeatherViewModel>() {
     override fun startObserve() {
         mViewModel?.apply {
             mWeather.observe(this@MainActivity, Observer { it ->
-                Log.i("tt", "天气信息:${it.data}:${it.data.wendu}")
                 tv_hello.text = "${it.data}"
 
             })

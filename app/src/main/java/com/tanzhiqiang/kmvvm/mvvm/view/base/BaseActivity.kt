@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
 import com.tanzhiqiang.kmvvm.mvvm.viewmodel.base.BaseViewModel
-import kotlinx.android.extensions.CacheImplementation
-import kotlinx.android.extensions.ContainerOptions
 
-@ContainerOptions(CacheImplementation.SPARSE_ARRAY)
 abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     protected var mViewModel: VM? = null

@@ -1,9 +1,8 @@
 package com.tanzhiqiang.kmvvm.repository
 
 import com.tanzhiqiang.kmvvm.mvvm.model.Weather
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
-import retrofit2.http.Path
 
 interface Api {
     /**

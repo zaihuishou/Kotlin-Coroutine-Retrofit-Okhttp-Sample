@@ -3,6 +3,9 @@
 buildscript {
     apply from: "${rootDir.absolutePath}/versions.gradle"
     repositories {
+        maven{
+            url "https://dl.bintray.com/kotlin/kotlin-eap"
+        }
         google()
         jcenter()
     }
@@ -17,6 +20,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven{
+            url "https://dl.bintray.com/kotlin/kotlin-eap"
+        }
         google()
         jcenter()
     }
